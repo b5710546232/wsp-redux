@@ -2,7 +2,6 @@ import {Action} from '../constants';
 import { CALL_API } from 'redux-api-middleware'
 import {USER_ENDPOINT,LOGIN_ENDPOINT} from '../constants/endpoints'
 
-
 export const logout = ()=> {
   return {
     type: Action.LOGOUT
