@@ -35,7 +35,12 @@ const authed = (state=initialState,action)=>{
          isLogin: true,
          username:action.payload.username
        })
-   case constants.RECEIVE_USERDATA:
+   case constants.LOAD_USER_DATA_SUCCESS:
+   console.log(action.payload);
+   return Object.assign({}, state, {
+        isLogin: true,
+        username:action.payload.username
+      })
   //  console.log(action.data);
   //  return Object.assign({}, state, {
   //       isLogin: true,

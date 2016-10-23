@@ -60,7 +60,3 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Navbar);
-// const VisibleTodoList = connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(TodoList)
