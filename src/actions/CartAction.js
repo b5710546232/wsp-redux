@@ -1,17 +1,9 @@
 import {Action} from '../constants';
 import { CALL_API } from 'redux-api-middleware'
+import {CART_ENDPOINT} from '../constants/endpoints'
 
-const CART_ENDPOINT = ''
-let nextTodoId = 0
-
-export const addItemtoCart = (item) => {
-  return {
-    type: 'ADDITEM_TO_CART',
-    id: nextTodoId++,
-    text
-  }
-}
-export const addItemtoCart = (data) => (
+// Add Item to cart
+export const AddItemtoCard = (data,token) => (
   (dispatch) =>
     dispatch({
       [CALL_API]: {
@@ -19,7 +11,7 @@ export const addItemtoCart = (data) => (
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'Authorization':'Token '+data.token
+          'Authorization':'Token '+token
         },
         method: 'POST',
         body: JSON.stringify(data),
@@ -29,7 +21,6 @@ export const addItemtoCart = (data) => (
             type: 'ADD_ITEM_TO_CART_SUCCESS',
             payload: (_action, _state, res) => {
               return res.json().then((data) => {
-                dispatch(loadUserdata(data))
                 return data
               })
             }
@@ -40,13 +31,91 @@ export const addItemtoCart = (data) => (
     }
   )
 )
-export const loadCart = (data) => {
-  // return {
-  //   type: 'SET_VISIBILITY_FILTER',
-  //   filter
-  // }
+//View Cart list
+export const loadCartList = (token) => (
+  {[CALL_API]: {
+    endpoint: CART_ENDPOINT,
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization':'Token '+token
+    },
+    method: 'GET',
+    types: ['LOAD_CART_LIST_REQUEST', 'LOAD_CART_LIST_SUCCESS', 'LOAD_CART_LIST_FAILURE']
+  }}
+)
+
+
+//Edit Item in cart
+export const updateCart = (data,id,token) => (
+  (dispatch) =>
+    dispatch({
+      [CALL_API]: {
+        endpoint: CART_ENDPOINT+id+'/',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization':'Token '+token
+        },
+        method: 'PUT',
+        body: JSON.stringify(data),
+        types: [
+          'UPDATE_CART_REQUEST',
+          {
+            type: 'UPDATE_CART_SUCCESS',
+            payload: (_action, _state, res) => {
+              return res.json().then((data) => {
+                dispatch(loadCategoryList())
+                return data
+              })
+            }
+          },
+          'UPDATE_CART_FAILURE'
+        ]
+      }
+    }
+  )
+)
+// Delete item form cart
+export const deleteItemInCart = (id,token)=> {
+  {[CALL_API]: {
+    endpoint: CART_ENDPOINT+id+'/',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization':'Token '+token
+    },
+    method: 'DELETE',
+    types: ['DELETE_CART_REQUEST', 'DELETE_PPAYMENTMETHOD_SUCCESS', 'DELETE_CART_FAILURE']
+  }}
 }
-
-export const editCart = () => {
-
+// Pay item in cart
+export const payItemInCart = (token) => {
+  (dispatch) =>
+    dispatch({
+      [CALL_API]: {
+        endpoint: CART_ENDPOINT+'pay/',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization':'Token '+token
+        },
+        method: 'POST',
+        body: JSON.stringify(data),
+        types: [
+          'PAY_CART_REQUEST',
+          {
+            type: 'PAY_CART_SUCCESS',
+            payload: (_action, _state, res) => {
+              return res.json().then((data) => {
+                dispatch(loadCategoryList())
+                return data
+              })
+            }
+          },
+          'PAY_CART_FAILURE'
+        ]
+      }
+    }
+  )
 }

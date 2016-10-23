@@ -1,13 +1,13 @@
 import {Action} from '../constants';
 import { CALL_API } from 'redux-api-middleware'
-import {CATEGORY_ENDPOINT,USER_ENDPOINT,LOGIN_ENDPOINT} from '../constants/endpoints'
+import {PRODUCT_ENDPOINT} from '../constants/endpoints'
 
-// Add new Category [Staff]
-export const createCategory = (data,token) => (
+// Add new Product [Staff]
+export const createProduct = (data,token) => (
   (dispatch) =>
     dispatch({
       [CALL_API]: {
-        endpoint: CATEGORY_ENDPOINT,
+        endpoint: PRODUCT_ENDPOINT,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -16,64 +16,53 @@ export const createCategory = (data,token) => (
         method: 'POST',
         body: JSON.stringify(data),
         types: [
-          'CREATE_CATEGORY_REQUEST',
+          'CREATE_PRODUCT_REQUEST',
           {
-            type: 'CREATE_CATEGORY_SUCCESS',
+            type: 'CREATE_PRODUCT_SUCCESS',
             payload: (_action, _state, res) => {
               return res.json().then((data) => {
                 return data
               })
             }
           },
-          'CREATE_CATEGORY_FAILURE'
+          'CREATE_PRODUCT_FAILURE'
         ]
       }
     }
   )
 )
-// List category [All(limit),Staff]
-export const loadCategoryList = () => (
+// List product [All(limit),Staff]
+export const loadProductList = () => (
   {[CALL_API]: {
-    endpoint: CATEGORY_ENDPOINT,
+    endpoint: PRODUCT_ENDPOINT,
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
     method: 'GET',
-    types: ['LOAD_CATEGORY_LIST_REQUEST', 'LOAD_CATEGORY_LIST_SUCCESS', 'LOAD_CATEGORY_LIST_FAILURE']
+    types: ['LOAD_PRODUCT_LIST_REQUEST', 'LOAD_PRODUCT_LIST_SUCCESS', 'LOAD_PRODUCT_LIST_FAILURE']
   }}
 )
 
-// Get category
-export const loadCategory = (id) => (
+// Get product
+export const loadProduct = (id) => (
   {[CALL_API]: {
-    endpoint: CATEGORY_ENDPOINT+id+'/',
+    endpoint: PRODUCT_ENDPOINT+id+'/',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
     method: 'GET',
-    types: ['LOAD_CATEGORY_REQUEST', 'LOAD_CATEGORY_SUCCESS', 'LOAD_CATEGORY_FAILURE']
+    types: ['LOAD_PRODUCT_REQUEST', 'LOAD_PRODUCT_SUCCESS', 'LOAD_PRODUCT_FAILURE']
   }}
 )
-// Get product in category
-export const loadProductInCategory = (id) => (
-  {[CALL_API]: {
-    endpoint: CATEGORY_ENDPOINT+id+'/product/',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    method: 'GET',
-    types: ['LOAD_PRODUCT_IN_CATEGORY_REQUEST', 'LOAD_PRODUCT_IN_CATEGORY_SUCCESS', 'LOAD_PRODUCT_IN_CATEGORY_FAILURE']
-  }}
-)
-// Edit Category [Staff]
-export const updateCategory = (data,id,token) => (
+
+// Edit Product [Staff]
+export const updateProduct = (data,id,token) => (
   (dispatch) =>
     dispatch({
       [CALL_API]: {
-        endpoint: CATEGORY_ENDPOINT+id+'/',
+        endpoint: PRODUCT_ENDPOINT+id+'/',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -82,9 +71,9 @@ export const updateCategory = (data,id,token) => (
         method: 'PUT',
         body: JSON.stringify(data),
         types: [
-          'UPDATE_CATEGORY_REQUEST',
+          'UPDATE_PRODUCT_REQUEST',
           {
-            type: 'UPDATE_CATEGORY_SUCCESS',
+            type: 'UPDATE_PRODUCT_SUCCESS',
             payload: (_action, _state, res) => {
               return res.json().then((data) => {
                 dispatch(loadCategoryList())
@@ -92,35 +81,35 @@ export const updateCategory = (data,id,token) => (
               })
             }
           },
-          'UPDATE_CATEGORY_FAILURE'
+          'UPDATE_PRODUCT_FAILURE'
         ]
       }
     }
   )
 )
-// Deactive Category [Staff]
-export const deleteCategory = (id,token)=> {
+// Deactive Product [Staff]
+export const deleteProduct = (id,token)=> {
   {[CALL_API]: {
-    endpoint: CATEGORY_ENDPOINT+id+'/',
+    endpoint: PRODUCT_ENDPOINT+id+'/',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization':'Token '+token
     },
     method: 'DELETE',
-    types: ['DELETE_CATEGORY_REQUEST', 'DELETE_CATEGORY_SUCCESS', 'DELETE_CATEGORY_FAILURE']
+    types: ['DELETE_PRODUCT_REQUEST', 'DELETE_PRODUCT_SUCCESS', 'DELETE_PRODUCT_FAILURE']
   }}
 }
-// Reactive Category [Staff]
-export const reactiveCategory = (id,token) => {
+// Reactive Product [Staff]
+export const reactiveProduct = (id,token) => {
   {[CALL_API]: {
-    endpoint: CATEGORY_ENDPOINT+id+'/reactive/',
+    endpoint: PRODUCT_ENDPOINT+id+'/reactive/',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization':'Token '+token
     },
     method: 'PUT',
-    types: ['REACTIVE_CATEGORY_REQUEST', 'REACTIVE_CATEGORY_SUCCESS', 'REACTIVE_CATEGORY_FAILURE']
+    types: ['REACTIVE_PRODUCT_REQUEST', 'REACTIVE_PRODUCT_SUCCESS', 'REACTIVE_PRODUCT_FAILURE']
   }}
 }

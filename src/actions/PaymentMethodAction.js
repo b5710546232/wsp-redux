@@ -1,13 +1,13 @@
 import {Action} from '../constants';
 import { CALL_API } from 'redux-api-middleware'
-import {CATEGORY_ENDPOINT,USER_ENDPOINT,LOGIN_ENDPOINT} from '../constants/endpoints'
+import {PAYMENTMETHOD_ENDPOINT} from '../constants/endpoints'
 
-// Add new Category [Staff]
-export const createCategory = (data,token) => (
+// Add new Product [Staff]
+export const createPaymentMethod = (data,token) => (
   (dispatch) =>
     dispatch({
       [CALL_API]: {
-        endpoint: CATEGORY_ENDPOINT,
+        endpoint: PAYMENTMETHOD_ENDPOINT,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -16,64 +16,53 @@ export const createCategory = (data,token) => (
         method: 'POST',
         body: JSON.stringify(data),
         types: [
-          'CREATE_CATEGORY_REQUEST',
+          'CREATE_PAYMENTMETHOD_REQUEST',
           {
-            type: 'CREATE_CATEGORY_SUCCESS',
+            type: 'CREATE_PAYMENTMETHOD_SUCCESS',
             payload: (_action, _state, res) => {
               return res.json().then((data) => {
                 return data
               })
             }
           },
-          'CREATE_CATEGORY_FAILURE'
+          'CREATE_PAYMENTMETHOD_FAILURE'
         ]
       }
     }
   )
 )
-// List category [All(limit),Staff]
-export const loadCategoryList = () => (
+// List Payment Method [All(limit),Staff]
+export const loadPaymentMethodList = () => (
   {[CALL_API]: {
-    endpoint: CATEGORY_ENDPOINT,
+    endpoint: PAYMENTMETHOD_ENDPOINT,
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
     method: 'GET',
-    types: ['LOAD_CATEGORY_LIST_REQUEST', 'LOAD_CATEGORY_LIST_SUCCESS', 'LOAD_CATEGORY_LIST_FAILURE']
+    types: ['LOAD_PAYMENTMETHOD_LIST_REQUEST', 'LOAD_PAYMENTMETHOD_LIST_SUCCESS', 'LOAD_PAYMENTMETHOD_LIST_FAILURE']
   }}
 )
 
-// Get category
-export const loadCategory = (id) => (
+// Get Payment Method
+export const loadPaymentMethod = (id) => (
   {[CALL_API]: {
-    endpoint: CATEGORY_ENDPOINT+id+'/',
+    endpoint: PAYMENTMETHOD_ENDPOINT+id+'/',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
     method: 'GET',
-    types: ['LOAD_CATEGORY_REQUEST', 'LOAD_CATEGORY_SUCCESS', 'LOAD_CATEGORY_FAILURE']
+    types: ['LOAD_PAYMENTMETHOD_REQUEST', 'LOAD_PPAYMENTMETHOD_SUCCESS', 'LOAD_PAYMENTMETHOD_FAILURE']
   }}
 )
-// Get product in category
-export const loadProductInCategory = (id) => (
-  {[CALL_API]: {
-    endpoint: CATEGORY_ENDPOINT+id+'/product/',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    method: 'GET',
-    types: ['LOAD_PRODUCT_IN_CATEGORY_REQUEST', 'LOAD_PRODUCT_IN_CATEGORY_SUCCESS', 'LOAD_PRODUCT_IN_CATEGORY_FAILURE']
-  }}
-)
-// Edit Category [Staff]
-export const updateCategory = (data,id,token) => (
+
+// Edit Payment Method [Staff]
+export const updatePaymentMethod = (data,id,token) => (
   (dispatch) =>
     dispatch({
       [CALL_API]: {
-        endpoint: CATEGORY_ENDPOINT+id+'/',
+        endpoint: PAYMENTMETHOD_ENDPOINT+id+'/',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -82,9 +71,9 @@ export const updateCategory = (data,id,token) => (
         method: 'PUT',
         body: JSON.stringify(data),
         types: [
-          'UPDATE_CATEGORY_REQUEST',
+          'UPDATE_PAYMENTMETHOD_REQUEST',
           {
-            type: 'UPDATE_CATEGORY_SUCCESS',
+            type: 'UPDATE_PAYMENTMETHOD_SUCCESS',
             payload: (_action, _state, res) => {
               return res.json().then((data) => {
                 dispatch(loadCategoryList())
@@ -92,35 +81,35 @@ export const updateCategory = (data,id,token) => (
               })
             }
           },
-          'UPDATE_CATEGORY_FAILURE'
+          'UPDATE_PAYMENTMETHOD_FAILURE'
         ]
       }
     }
   )
 )
-// Deactive Category [Staff]
-export const deleteCategory = (id,token)=> {
+// Deactive Payment Method [Staff]
+export const deletePaymentMethod = (id,token)=> {
   {[CALL_API]: {
-    endpoint: CATEGORY_ENDPOINT+id+'/',
+    endpoint: PAYMENTMETHOD_ENDPOINT+id+'/',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization':'Token '+token
     },
     method: 'DELETE',
-    types: ['DELETE_CATEGORY_REQUEST', 'DELETE_CATEGORY_SUCCESS', 'DELETE_CATEGORY_FAILURE']
+    types: ['DELETE_PAYMENTMETHOD_REQUEST', 'DELETE_PPAYMENTMETHOD_SUCCESS', 'DELETE_PAYMENTMETHOD_FAILURE']
   }}
 }
-// Reactive Category [Staff]
-export const reactiveCategory = (id,token) => {
+// Reactive Payment Method [Staff]
+export const reactivePaymentMethod = (id,token) => {
   {[CALL_API]: {
-    endpoint: CATEGORY_ENDPOINT+id+'/reactive/',
+    endpoint: PAYMENTMETHOD_ENDPOINT+id+'/reactive/',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization':'Token '+token
     },
     method: 'PUT',
-    types: ['REACTIVE_CATEGORY_REQUEST', 'REACTIVE_CATEGORY_SUCCESS', 'REACTIVE_CATEGORY_FAILURE']
+    types: ['REACTIVE_PAYMENTMETHOD_REQUEST', 'REACTIVE_PAYMENTMETHOD_SUCCESS', 'REACTIVE_PAYMENTMETHOD_FAILURE']
   }}
 }

@@ -5,9 +5,9 @@ const initialState = []
 
 const categories = (state=initialState,action)=>{
   switch(action.type) {
-    case 'LOAD_CATEGORY_LIST_SUCCESS':
+    case 'LOAD_PRODUCT_LIST_SUCCESS':
       return action.payload
-    case 'LOAD_CATEGORY_SUCCESS':
+    case 'LOAD_PRODUCT_SUCCESS':
       return [action.payload]
     default:
       return state;
