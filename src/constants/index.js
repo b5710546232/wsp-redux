@@ -1,8 +1,1 @@
-const Constants = {
-  LOGIN: 'LOGIN',
-  LOGOUT: 'LOGOUT',
-  LOGIN_SUCCESS:'LOGIN_SUCCESS',
-  LOAD_USER_DATA_SUCCESS:'LOAD_USER_DATA_SUCCESS'
-}
-
-export default Constants;
+export Action from './actionTypes'

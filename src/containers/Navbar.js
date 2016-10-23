@@ -17,6 +17,7 @@ class Navbar extends Component {
     this.props.login(data)
 
     this.refs.username.value = ''
+    this.refs.password.value = ''
   }
   onLogout(e){e.preventDefault()
 

@@ -5,12 +5,24 @@ class Header extends Component {
     super(props);
   }
 
+  renderUserData(){
+    if(this.props.authed.isLogin){
+      return(
+        <div>
+          <div>name : {this.props.authed.userdata.username}</div>
+          <div>email : {this.props.authed.userdata.email}</div>
+        </div>
+      )
+    }
+  }
   render() {
     var usernameView = this.props.authed.isLogin ? <h1>{this.props.authed.username}</h1> : "";
     return (<div>
       <h3>Header</h3>
     <ul>
       Wellcome :{usernameView}
+      <br/>
+      {this.renderUserData()}
     </ul>
     </div>);
   }

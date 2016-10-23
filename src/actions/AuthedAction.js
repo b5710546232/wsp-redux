@@ -1,23 +1,21 @@
-import constants from '../constants';
+import {Action} from '../constants';
 import { CALL_API } from 'redux-api-middleware'
-const LOGIN_ENDPOINT = 'http://localhost:8000/api/v1/u/login/'
-const USER_ENDPOINT = 'http://localhost:8000/api/v1/u/user/0/'
+import {USER_ENDPOINT,LOGIN_ENDPOINT} from '../constants/endpoints'
 
 
 export const logout = ()=> {
   return {
-    type: constants.LOGOUT
+    type: Action.LOGOUT
   }
 }
 
-
-export const loadUserdata = (token) => (
+export const loadUserdata = (data) => (
   {[CALL_API]: {
     endpoint: USER_ENDPOINT,
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization':'Token '+token
+      'Authorization':'Token '+data.token
     },
     method: 'GET',
     types: ['LOAD_USER_DATA_REQUEST', 'LOAD_USER_DATA_SUCCESS', 'LOAD_USER_DATA_FAILURE']
@@ -36,17 +34,17 @@ export const login = (data) => (
         method: 'POST',
         body: JSON.stringify(data),
         types: [
-          'LOGIN_REQUEST',
+          'RECEIVE_ACCESS_TOKEN_REQUEST',
           {
-            type: 'LOGIN_SUCCESS',
+            type: 'RECEIVE_ACCESS_TOKEN_SUCCESS',
             payload: (_action, _state, res) => {
               return res.json().then((data) => {
-                dispatch(loadUserdata(data.token))
-                return token
+                dispatch(loadUserdata(data))
+                return data
               })
             }
           },
-          'LOGIN_FAILURE'
+          'RECEIVE_ACCESS_TOKEN_FAILURE'
         ]
       }
     }

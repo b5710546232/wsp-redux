@@ -1,10 +1,5 @@
-import constants from '../constants';
+import {Action} from '../constants';
 import { CALL_API } from 'redux-api-middleware'
-// const initialState = {
-//   accessToken:null,
-//   user:null,
-// }
-//
 // const authed = (state=initialState,action)=>{
 //   switch (action.type) {
 //     case 'RECEIVE_ACCESS_TOKEN':
@@ -24,22 +19,23 @@ import { CALL_API } from 'redux-api-middleware'
 
 const initialState = {
   username: "",
-  isLogin: false
+  isLogin: false,
+  accessToken:null,
+  userdata:null,
 }
 
 const authed = (state=initialState,action)=>{
   switch(action.type) {
-    case constants.LOGIN_SUCCESS:
-    console.log('action',action.payload.username);
+    case Action.RECEIVE_ACCESS_TOKEN_SUCCESS:
+    console.log('action',action.payload);
     return Object.assign({}, state, {
-         isLogin: true,
-         username:action.payload.username
+         accessToken : action.payload.token
        })
-   case constants.LOAD_USER_DATA_SUCCESS:
-   console.log(action.payload);
+   case Action.LOAD_USER_DATA_SUCCESS:
    return Object.assign({}, state, {
         isLogin: true,
-        username:action.payload.username
+        username:action.payload.username,
+        userdata:action.payload
       })
   //  console.log(action.data);
   //  return Object.assign({}, state, {
@@ -49,7 +45,7 @@ const authed = (state=initialState,action)=>{
       // newState.isLogin = true,
       // newState.username = action.data
       // return newState;
-    case constants.LOGOUT:
+    case Action.LOGOUT:
       return initialState;
     default:
       return state;
