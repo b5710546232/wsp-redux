@@ -15,5 +15,13 @@ export default function configureStore(preloadedState) {
   const store = createStore(rootReducer, preloadedState, composeEnhancers(
     applyMiddleware(...middlewares)
   ))
+
+  if (module.hot) {
+  module.hot.accept('../reducers', () => {
+    const nextReducer = require('../reducers').default
+
+    store.replaceReducer(nextReducer)
+  })
+}
   return store
 }

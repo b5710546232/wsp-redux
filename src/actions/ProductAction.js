@@ -88,7 +88,7 @@ export const updateProduct = (data,id,token) => (
   )
 )
 // Deactive Product [Staff]
-export const deleteProduct = (id,token)=> {
+export const deleteProduct = (id,token)=> (
   {[CALL_API]: {
     endpoint: PRODUCT_ENDPOINT+id+'/',
     headers: {
@@ -99,9 +99,9 @@ export const deleteProduct = (id,token)=> {
     method: 'DELETE',
     types: ['DELETE_PRODUCT_REQUEST', 'DELETE_PRODUCT_SUCCESS', 'DELETE_PRODUCT_FAILURE']
   }}
-}
+)
 // Reactive Product [Staff]
-export const reactiveProduct = (id,token) => {
+export const reactiveProduct = (id,token) => (
   {[CALL_API]: {
     endpoint: PRODUCT_ENDPOINT+id+'/reactive/',
     headers: {
@@ -112,4 +112,4 @@ export const reactiveProduct = (id,token) => {
     method: 'PUT',
     types: ['REACTIVE_PRODUCT_REQUEST', 'REACTIVE_PRODUCT_SUCCESS', 'REACTIVE_PRODUCT_FAILURE']
   }}
-}
+)

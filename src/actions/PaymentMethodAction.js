@@ -88,7 +88,7 @@ export const updatePaymentMethod = (data,id,token) => (
   )
 )
 // Deactive Payment Method [Staff]
-export const deletePaymentMethod = (id,token)=> {
+export const deletePaymentMethod = (id,token)=> (
   {[CALL_API]: {
     endpoint: PAYMENTMETHOD_ENDPOINT+id+'/',
     headers: {
@@ -99,9 +99,9 @@ export const deletePaymentMethod = (id,token)=> {
     method: 'DELETE',
     types: ['DELETE_PAYMENTMETHOD_REQUEST', 'DELETE_PPAYMENTMETHOD_SUCCESS', 'DELETE_PAYMENTMETHOD_FAILURE']
   }}
-}
+)
 // Reactive Payment Method [Staff]
-export const reactivePaymentMethod = (id,token) => {
+export const reactivePaymentMethod = (id,token) => (
   {[CALL_API]: {
     endpoint: PAYMENTMETHOD_ENDPOINT+id+'/reactive/',
     headers: {
@@ -112,4 +112,4 @@ export const reactivePaymentMethod = (id,token) => {
     method: 'PUT',
     types: ['REACTIVE_PAYMENTMETHOD_REQUEST', 'REACTIVE_PAYMENTMETHOD_SUCCESS', 'REACTIVE_PAYMENTMETHOD_FAILURE']
   }}
-}
+)

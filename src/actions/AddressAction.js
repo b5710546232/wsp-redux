@@ -90,7 +90,7 @@ export const updatePaymentMethod = (data,id,token) => (
   )
 )
 // Deactive address
-export const deletePaymentMethod = (id,token)=> {
+export const deletePaymentMethod = (id,token)=> (
   {[CALL_API]: {
     endpoint: ADDRESS_ENDPOINT+id+'/',
     headers: {
@@ -101,4 +101,4 @@ export const deletePaymentMethod = (id,token)=> {
     method: 'DELETE',
     types: ['DELETE_ADDRESS_REQUEST', 'DELETE_PPAYMENTMETHOD_SUCCESS', 'DELETE_ADDRESS_FAILURE']
   }}
-}
+)

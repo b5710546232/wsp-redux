@@ -77,7 +77,7 @@ export const updateCart = (data,id,token) => (
   )
 )
 // Delete item form cart
-export const deleteItemInCart = (id,token)=> {
+export const deleteItemInCart = (id,token)=> (
   {[CALL_API]: {
     endpoint: CART_ENDPOINT+id+'/',
     headers: {
@@ -88,7 +88,7 @@ export const deleteItemInCart = (id,token)=> {
     method: 'DELETE',
     types: ['DELETE_CART_REQUEST', 'DELETE_PPAYMENTMETHOD_SUCCESS', 'DELETE_CART_FAILURE']
   }}
-}
+)
 // Pay item in cart
 export const payItemInCart = (token) => {
   (dispatch) =>

@@ -99,7 +99,7 @@ export const updateCategory = (data,id,token) => (
   )
 )
 // Deactive Category [Staff]
-export const deleteCategory = (id,token)=> {
+export const deleteCategory = (id,token)=> (
   {[CALL_API]: {
     endpoint: CATEGORY_ENDPOINT+id+'/',
     headers: {
@@ -110,9 +110,9 @@ export const deleteCategory = (id,token)=> {
     method: 'DELETE',
     types: ['DELETE_CATEGORY_REQUEST', 'DELETE_CATEGORY_SUCCESS', 'DELETE_CATEGORY_FAILURE']
   }}
-}
+)
 // Reactive Category [Staff]
-export const reactiveCategory = (id,token) => {
+export const reactiveCategory = (id,token) => (
   {[CALL_API]: {
     endpoint: CATEGORY_ENDPOINT+id+'/reactive/',
     headers: {
@@ -123,4 +123,4 @@ export const reactiveCategory = (id,token) => {
     method: 'PUT',
     types: ['REACTIVE_CATEGORY_REQUEST', 'REACTIVE_CATEGORY_SUCCESS', 'REACTIVE_CATEGORY_FAILURE']
   }}
-}
+)
